@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://bkc0r8yj3yelf"]
+[gd_scene format=3 uid="uid://bkc0r8yj3yelf"]
 
 [ext_resource type="Script" uid="uid://cfhpxqsltp27n" path="res://Scripts/character_camera.gd" id="1_7k2ti"]
 [ext_resource type="Texture2D" uid="uid://da8v37dfccdh3" path="res://Assets/fish_primitive.png" id="2_iw30f"]
@@ -9,27 +9,27 @@ radius = 51.0392
 [sub_resource type="CircleShape2D" id="CircleShape2D_7k2ti"]
 radius = 40.0
 
-[node name="CharacterCamera" type="CharacterBody2D"]
+[node name="CharacterCamera" type="CharacterBody2D" unique_id=1842549794]
 collision_mask = 0
 script = ExtResource("1_7k2ti")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1622091940]
 zoom = Vector2(0.5, 0.5)
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=165419184]
 position = Vector2(-10, 0)
 texture = ExtResource("2_iw30f")
 flip_h = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=49444859]
 rotation = 1.5707964
 shape = SubResource("CircleShape2D_68to8")
 
-[node name="Water Detector" type="Area2D" parent="."]
+[node name="Water Detector" type="Area2D" parent="." unique_id=1735759593]
 collision_layer = 0
 collision_mask = 4
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Water Detector"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Water Detector" unique_id=1172468427]
 shape = SubResource("CircleShape2D_7k2ti")
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]

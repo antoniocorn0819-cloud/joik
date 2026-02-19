@@ -10,7 +10,7 @@ var game_state = State.Air
 
 # pixels per second squared
 const ACCELERATION = 1200.0
-
+const GRAVITY = 1200.0
 # gets reference to detector child
 var detector
 func _ready():
@@ -33,7 +33,7 @@ func _physics_process(delta):
 		State.Air:
 			# CHANGE TO CONSTANT
 			if not is_on_floor():
-				velocity += get_gravity() * delta	
+				velocity.y += GRAVITY * delta	
 	# visual changes
 	look_at(get_global_mouse_position())
 	# processes physics
