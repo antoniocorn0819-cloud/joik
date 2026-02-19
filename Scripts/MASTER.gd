@@ -4,7 +4,7 @@ enum Type {
 	Water, Reset
 }
 
-var current_checkpoint_id = 0
+var current_checkpoint_id = 4
 
 signal Death
 signal Respawn

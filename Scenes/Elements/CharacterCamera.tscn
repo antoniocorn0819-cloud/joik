@@ -14,7 +14,7 @@ collision_mask = 0
 script = ExtResource("1_7k2ti")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1622091940]
-zoom = Vector2(0.5, 0.5)
+zoom = Vector2(0.4, 0.4)
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=165419184]
 position = Vector2(-10, 0)

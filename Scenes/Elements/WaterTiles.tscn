@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://55dmg6q55rrk"]
+[gd_scene format=3 uid="uid://55dmg6q55rrk"]
 
 [ext_resource type="Texture2D" uid="uid://dx5htwse3kg2j" path="res://Assets/air_primitive_sheet.png" id="1_nxsqf"]
 [ext_resource type="Script" uid="uid://cko4dw6v8c4n" path="res://Scripts/tiles_differentiator.gd" id="2_gbw8w"]
@@ -53,7 +53,8 @@ physics_layer_0/collision_layer = 4
 physics_layer_0/collision_mask = 0
 sources/0 = SubResource("TileSetAtlasSource_ko8bl")
 
-[node name="WaterTiles" type="TileMapLayer"]
-modulate = Color(1.540184e-06, 0.74794555, 0.7487199, 0.4862745)
+[node name="WaterTiles" type="TileMapLayer" unique_id=529502083]
+modulate = Color(0.18602368, 0.7565713, 0.82105184, 0.4862745)
+tile_map_data = PackedByteArray(0, 0, 0, 0, 255, 255, 0, 0, 1, 0, 2, 0, 0, 0)
 tile_set = SubResource("TileSet_gwala")
 script = ExtResource("2_gbw8w")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://6vc8vp8uc5vm"]
+[gd_scene format=3 uid="uid://6vc8vp8uc5vm"]
 
 [ext_resource type="Texture2D" uid="uid://biwtmf4c66a6l" path="res://Assets/wall_primitive_texture.png" id="1_5b0a4"]
 
@@ -11,8 +11,7 @@ texture_region_size = Vector2i(128, 128)
 [sub_resource type="TileSet" id="TileSet_1nhq0"]
 tile_size = Vector2i(128, 128)
 physics_layer_0/collision_layer = 2
-physics_layer_0/collision_mask = 0
 sources/1 = SubResource("TileSetAtlasSource_ukks5")
 
-[node name="SolidTiles" type="TileMapLayer"]
+[node name="SolidTiles" type="TileMapLayer" unique_id=565262231]
 tile_set = SubResource("TileSet_1nhq0")

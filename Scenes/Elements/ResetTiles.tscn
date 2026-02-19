@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://bi12e2c1bkbyj"]
+[gd_scene format=3 uid="uid://bi12e2c1bkbyj"]
 
 [ext_resource type="Texture2D" uid="uid://vfx021aohqvs" path="res://Assets/reset_texture.png" id="1_llklf"]
 [ext_resource type="Script" uid="uid://cko4dw6v8c4n" path="res://Scripts/tiles_differentiator.gd" id="2_oe5c4"]
@@ -15,8 +15,7 @@ physics_layer_0/collision_layer = 4
 physics_layer_0/collision_mask = 0
 sources/0 = SubResource("TileSetAtlasSource_oe5c4")
 
-[node name="ResetTiles" type="TileMapLayer"]
-tile_map_data = PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+[node name="ResetTiles" type="TileMapLayer" unique_id=1253896724]
 tile_set = SubResource("TileSet_8a8qc")
 script = ExtResource("2_oe5c4")
 local_type = 1

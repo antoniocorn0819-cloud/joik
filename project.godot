@@ -15,7 +15,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="joik"
-run/main_scene="uid://dsk4p584b8vc"
+run/main_scene="uid://bkilwcmagvwtx"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -47,4 +47,4 @@ move={
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
-environment/defaults/default_clear_color=Color(0.40706158, 0.5956508, 0.8889315, 1)
+environment/defaults/default_clear_color=Color(0.665513, 0.7653913, 0.88268733, 1)
