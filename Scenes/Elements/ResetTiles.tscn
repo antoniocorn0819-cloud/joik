@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://bi12e2c1bkbyj"]
+
+[ext_resource type="Texture2D" uid="uid://vfx021aohqvs" path="res://Assets/reset_texture.png" id="1_llklf"]
+[ext_resource type="Script" uid="uid://cko4dw6v8c4n" path="res://Scripts/tiles_differentiator.gd" id="2_oe5c4"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_oe5c4"]
+texture = ExtResource("1_llklf")
+texture_region_size = Vector2i(128, 128)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+
+[sub_resource type="TileSet" id="TileSet_8a8qc"]
+tile_size = Vector2i(128, 128)
+physics_layer_0/collision_layer = 4
+physics_layer_0/collision_mask = 0
+sources/0 = SubResource("TileSetAtlasSource_oe5c4")
+
+[node name="ResetTiles" type="TileMapLayer"]
+modulate = Color(0.76230544, 0.27137265, 0.99999887, 1)
+tile_map_data = PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+tile_set = SubResource("TileSet_8a8qc")
+script = ExtResource("2_oe5c4")
+local_type = 1

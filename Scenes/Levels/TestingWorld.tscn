@@ -1,0 +1,28 @@
+[gd_scene load_steps=7 format=4 uid="uid://dsk4p584b8vc"]
+
+[ext_resource type="PackedScene" uid="uid://bkc0r8yj3yelf" path="res://Scenes/Elements/CharacterCamera.tscn" id="1_cmdsc"]
+[ext_resource type="Script" uid="uid://b4oafkuhh8cyq" path="res://Scripts/checkpoint_manager.gd" id="3_0fow4"]
+[ext_resource type="PackedScene" uid="uid://55dmg6q55rrk" path="res://Scenes/Elements/AirTiles.tscn" id="3_oopcs"]
+[ext_resource type="PackedScene" uid="uid://6vc8vp8uc5vm" path="res://Scenes/Elements/SolidTiles.tscn" id="4_0fow4"]
+[ext_resource type="PackedScene" uid="uid://bi12e2c1bkbyj" path="res://Scenes/Elements/ResetTiles.tscn" id="4_6kv1d"]
+[ext_resource type="PackedScene" uid="uid://cmfahrx148ndp" path="res://Scenes/Elements/Checkpoint.tscn" id="4_msn6r"]
+
+[node name="Testing World" type="Node2D"]
+
+[node name="CharacterCamera" parent="." instance=ExtResource("1_cmdsc")]
+collision_mask = 2
+
+[node name="SolidTiles" parent="." instance=ExtResource("4_0fow4")]
+tile_map_data = PackedByteArray("AAD3/wEAAQAAAAAAAAD3/wIAAQAAAAAAAAD3/wMAAQAAAAAAAAD3/wQAAQAAAAAAAAD3/wUAAQAAAAAAAAD3/wYAAQAAAAAAAAD3/wcAAQAAAAAAAAD4/wcAAQAAAAAAAAD5/wcAAQAAAAAAAAD6/wcAAQAAAAAAAAD7/wcAAQAAAAAAAAD8/wcAAQAAAAAAAAD9/wcAAQAAAAAAAAD+/wcAAQAAAAAAAAD//wcAAQAAAAAAAAAAAAcAAQAAAAAAAAABAAcAAQAAAAAAAAACAAcAAQAAAAAAAAADAAcAAQAAAAAAAAAEAAcAAQAAAAAAAAAFAAcAAQAAAAAAAAAGAAcAAQAAAAAAAAAHAAcAAQAAAAAAAAAIAAcAAQAAAAAAAAA=")
+
+[node name="WaterTiles" parent="." instance=ExtResource("3_oopcs")]
+tile_map_data = PackedByteArray("AAD+//3/AAABAAIAAAD+//z/AAABAAIAAAD9//z/AAABAAIAAAD8//z/AAABAAIAAAD8//3/AAABAAIAAAD7//3/AAABAAIAAAD9//3/AAABAAIAAAD7//z/AAABAAIAAAD6//z/AAABAAIAAAD5//z/AAABAAIAAAD5//3/AAABAAIAAAD6//3/AAABAAIAAAD7//v/AAABAAIAAAD5//7/AAABAAIAAAD6//7/AAABAAIAAAD7//7/AAABAAIAAAD8//7/AAABAAIAAAD9//7/AAABAAIAAAD6//v/AAABAAIAAAD5//v/AAABAAIAAAD8//v/AAABAAIAAAD9//v/AAABAAIAAAD+//v/AAABAAIAAAD+//7/AAABAAIAAAD5//r/AAABAAEAAAD6//r/AAABAAEAAAD7//r/AAABAAEAAAD8//r/AAABAAEAAAD9//r/AAABAAEAAAD+//r/AAABAAEAAAD///r/AAACAAEAAAD///v/AAACAAIAAAD///z/AAACAAIAAAD///3/AAACAAIAAAD///7/AAACAAIAAAD/////AAACAAMAAAD+////AAABAAMAAAD9////AAABAAMAAAD8////AAABAAMAAAD7////AAABAAMAAAD6////AAABAAMAAAD5////AAABAAMAAAD4////AAAAAAMAAAD4//7/AAAAAAIAAAD4//3/AAAAAAIAAAD4//z/AAAAAAIAAAD4//v/AAAAAAIAAAD4//r/AAAAAAEAAAA=")
+
+[node name="ResetTiles" parent="." instance=ExtResource("4_6kv1d")]
+tile_map_data = PackedByteArray("AAANAAEAAAAAAAAAAAAMAAEAAAAAAAAAAAAMAAIAAAAAAAAAAAAMAAMAAAAAAAAAAAAMAAQAAAAAAAAAAAANAAMAAAAAAAAAAAANAAIAAAAAAAAAAAANAAQAAAAAAAAAAAD1/wsAAAAAAAAAAAD2/wsAAAAAAAAAAAD3/wsAAAAAAAAAAAD4/wsAAAAAAAAAAAD5/wsAAAAAAAAAAAD6/wsAAAAAAAAAAAD7/wsAAAAAAAAAAAD8/wsAAAAAAAAAAAD9/wsAAAAAAAAAAAD+/wsAAAAAAAAAAAD//wsAAAAAAAAAAAAAAAsAAAAAAAAAAAABAAsAAAAAAAAAAAACAAsAAAAAAAAAAAADAAsAAAAAAAAAAAAEAAsAAAAAAAAAAAAFAAsAAAAAAAAAAAAGAAsAAAAAAAAAAAAHAAsAAAAAAAAAAAAIAAsAAAAAAAAAAAAJAAsAAAAAAAAAAAAKAAsAAAAAAAAAAAALAAsAAAAAAAAAAAAMAAsAAAAAAAAAAAA=")
+
+[node name="Checkpoint Manager" type="Node" parent="."]
+script = ExtResource("3_0fow4")
+
+[node name="Checkpoint" parent="Checkpoint Manager" instance=ExtResource("4_msn6r")]
+position = Vector2(0, 512)

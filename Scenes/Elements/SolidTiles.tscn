@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://6vc8vp8uc5vm"]
+
+[ext_resource type="Texture2D" uid="uid://biwtmf4c66a6l" path="res://Assets/wall_primitive_texture.png" id="1_5b0a4"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ukks5"]
+texture = ExtResource("1_5b0a4")
+texture_region_size = Vector2i(128, 128)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+
+[sub_resource type="TileSet" id="TileSet_1nhq0"]
+tile_size = Vector2i(128, 128)
+physics_layer_0/collision_layer = 2
+physics_layer_0/collision_mask = 0
+sources/1 = SubResource("TileSetAtlasSource_ukks5")
+
+[node name="SolidTiles" type="TileMapLayer"]
+modulate = Color(0.48870558, 0.5393317, 0.66737926, 1)
+tile_set = SubResource("TileSet_1nhq0")
