@@ -1,7 +1,7 @@
 extends Node
 
 enum Type {
-	Air, Reset
+	Water, Reset
 }
 
 var current_checkpoint_id = 0

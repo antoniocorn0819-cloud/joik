@@ -53,7 +53,7 @@ physics_layer_0/collision_layer = 4
 physics_layer_0/collision_mask = 0
 sources/0 = SubResource("TileSetAtlasSource_ko8bl")
 
-[node name="AirTiles" type="TileMapLayer"]
-modulate = Color(1, 1, 1, 0.4862745)
+[node name="WaterTiles" type="TileMapLayer"]
+modulate = Color(1.540184e-06, 0.74794555, 0.7487199, 0.4862745)
 tile_set = SubResource("TileSet_gwala")
 script = ExtResource("2_gbw8w")

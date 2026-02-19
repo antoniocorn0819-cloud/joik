@@ -10,12 +10,11 @@ radius = 51.0392
 radius = 40.0
 
 [node name="CharacterCamera" type="CharacterBody2D"]
-modulate = Color(0.63109195, 0.68357253, 0.68350923, 1)
 collision_mask = 0
 script = ExtResource("1_7k2ti")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(0.75, 0.75)
+zoom = Vector2(0.5, 0.5)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-10, 0)

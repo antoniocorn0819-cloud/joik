@@ -43,4 +43,4 @@ move={
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
-environment/defaults/default_clear_color=Color(0.13450402, 0.3555614, 0.5592368, 1)
+environment/defaults/default_clear_color=Color(0.40706158, 0.5956508, 0.8889315, 1)

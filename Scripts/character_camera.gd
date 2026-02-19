@@ -6,7 +6,7 @@ enum State {
 }
 
 #CHANGE TO INITIAL CHECK
-var game_state = State.Water
+var game_state = State.Air
 
 # pixels per second squared
 const ACCELERATION = 1200.0
@@ -46,8 +46,8 @@ func _on_water_detector_body_entered(body):
 	# checks type of tilemap
 	# MAKE SEPERATE FUNCTION
 	match body.local_type:
-		Master.Type.Air:
-			game_state = State.Air
+		Master.Type.Water:
+			game_state = State.Water
 		Master.Type.Reset:
 			Master.Death.emit()
 
@@ -56,7 +56,7 @@ func _on_water_detector_body_exited(body):
 	# if there are no overlapping bodies, fish is in air
 	# MAKE SEPERATE FUNCTION
 	if !detector.get_overlapping_bodies():
-		game_state = State.Water
+		game_state = State.Air
 
 # detects reset input
 func _input(event):
