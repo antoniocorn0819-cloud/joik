@@ -1,12 +1,7 @@
 extends Node
 
 
-# connects death_manager
-func _ready():
-	Master.Death.connect(death_manager)
-
-
-func death_manager():
+func death_manager() -> Vector2:
 	var x
 	var y
 	for child in get_children():
@@ -14,4 +9,4 @@ func death_manager():
 			x = child.position.x
 			y = child.position.y
 			break
-	Master.Respawn.emit(x,y)
+	return Vector2(x,y)
