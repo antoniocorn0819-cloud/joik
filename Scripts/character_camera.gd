@@ -120,6 +120,7 @@ func _input(event) -> void:
 func animation_handler() -> void:
 	if pressing:
 		sprite.animation = "swim"
+		particle_emitter.emitting = false
 		if game_state == State.Water:
 			particle_emitter.emitting = true
 	else:
