@@ -19,9 +19,14 @@ run/main_scene="uid://bkilwcmagvwtx"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[audio]
+
+buses/default_bus_layout="uid://cntdyuuaqm2q6"
+
 [autoload]
 
 Master="*res://Scripts/MASTER.gd"
+Audiomanager="*uid://bn87wn6so3xov"
 
 [input]
 
@@ -45,6 +50,7 @@ move={
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
 environment/defaults/default_clear_color=Color(0.665513, 0.7653913, 0.88268733, 1)

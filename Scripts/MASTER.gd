@@ -4,4 +4,4 @@ enum Type {
 	Water, Reset
 }
 
-var current_checkpoint_id = 7
+var current_checkpoint_id = 4

@@ -1,31 +1,153 @@
 [gd_scene format=3 uid="uid://bkc0r8yj3yelf"]
 
 [ext_resource type="Script" uid="uid://cfhpxqsltp27n" path="res://Scripts/character_camera.gd" id="1_7k2ti"]
-[ext_resource type="Texture2D" uid="uid://da8v37dfccdh3" path="res://Assets/fish_primitive.png" id="2_iw30f"]
+[ext_resource type="Texture2D" uid="uid://dd6krc84tkwdm" path="res://Assets/Sprites/Greg/greg_swim_scaled.png" id="2_3dccs"]
+[ext_resource type="Texture2D" uid="uid://bgyxvk08ov2tg" path="res://Assets/Sprites/Greg/greg_idle_scaled.png" id="2_fgyvi"]
+[ext_resource type="Texture2D" uid="uid://dblbms8twwv5l" path="res://Assets/bubble_texture_primitive.png" id="4_fgyvi"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_61xym"]
+lifetime_randomness = 0.51
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(-81.285, -3.47, -2.79)
+direction = Vector3(-5.595, 0, 0)
+spread = 90.0
+initial_velocity_min = 85.229996
+initial_velocity_max = 187.5
+gravity = Vector3(0, 0, 0)
+damping_min = 100.00001
+damping_max = 100.00001
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1ekde"]
+atlas = ExtResource("2_fgyvi")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x8rcx"]
+atlas = ExtResource("2_fgyvi")
+region = Rect2(256, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wbc3l"]
+atlas = ExtResource("2_fgyvi")
+region = Rect2(512, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0ikj3"]
+atlas = ExtResource("2_fgyvi")
+region = Rect2(768, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fgyvi"]
+atlas = ExtResource("2_3dccs")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_61xym"]
+atlas = ExtResource("2_3dccs")
+region = Rect2(256, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qo28u"]
+atlas = ExtResource("2_3dccs")
+region = Rect2(512, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kvhr5"]
+atlas = ExtResource("2_3dccs")
+region = Rect2(768, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lg452"]
+atlas = ExtResource("2_3dccs")
+region = Rect2(1024, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nd5vq"]
+atlas = ExtResource("2_3dccs")
+region = Rect2(1280, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m0v5q"]
+atlas = ExtResource("2_3dccs")
+region = Rect2(1536, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5g4hg"]
+atlas = ExtResource("2_3dccs")
+region = Rect2(1792, 0, 256, 256)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1ekde"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1ekde")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x8rcx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wbc3l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0ikj3")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fgyvi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_61xym")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qo28u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kvhr5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lg452")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nd5vq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m0v5q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5g4hg")
+}],
+"loop": true,
+"name": &"swim",
+"speed": 30.0
+}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_68to8"]
-radius = 51.0392
+radius = 60.00833
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7k2ti"]
-radius = 40.0
+radius = 47.0
 
 [node name="CharacterCamera" type="CharacterBody2D" unique_id=1842549794]
 collision_mask = 0
 script = ExtResource("1_7k2ti")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1622091940]
+visible = false
 zoom = Vector2(0.25, 0.25)
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=165419184]
-position = Vector2(-10, 0)
-texture = ExtResource("2_iw30f")
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=946830791]
+position = Vector2(-30, 0)
+texture = ExtResource("4_fgyvi")
+process_material = SubResource("ParticleProcessMaterial_61xym")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=992340787]
+position = Vector2(-30, 0)
+sprite_frames = SubResource("SpriteFrames_1ekde")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.7538482
 flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=49444859]
+visible = false
 rotation = 1.5707964
 shape = SubResource("CircleShape2D_68to8")
 
 [node name="Water Detector" type="Area2D" parent="." unique_id=1735759593]
+visible = false
 collision_layer = 0
 collision_mask = 4
 

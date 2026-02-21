@@ -1,0 +1,17 @@
+[gd_resource type="AudioBusLayout" format=3 uid="uid://cntdyuuaqm2q6"]
+
+[sub_resource type="AudioEffectLowPassFilter" id="AudioEffectLowPassFilter_j3pel"]
+resource_name = "LowPassFilter"
+cutoff_hz = 1488.0
+resonance = 1.0
+
+[resource]
+bus/0/volume_db = 2.051506
+bus/1/name = &"Underwater"
+bus/1/solo = false
+bus/1/mute = false
+bus/1/bypass_fx = false
+bus/1/volume_db = 3.8357735
+bus/1/send = &"Master"
+bus/1/effect/0/effect = SubResource("AudioEffectLowPassFilter_j3pel")
+bus/1/effect/0/enabled = true

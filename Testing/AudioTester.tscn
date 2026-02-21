@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://bll2kfblm2mlk"]
+
+[ext_resource type="AudioStream" uid="uid://drjtb8bloc0d2" path="res://Assets/Sounds/Hit/Hit_Loud-2.wav" id="1_djidn"]
+[ext_resource type="Script" uid="uid://posvuul5jma4" path="res://Testing/audio_tester.gd" id="2_nd7xi"]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" unique_id=461877575]
+stream = ExtResource("1_djidn")
+bus = &"Underwater"
+script = ExtResource("2_nd7xi")
