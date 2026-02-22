@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dx5htwse3kg2j"
-path="res://.godot/imported/air_primitive_sheet.png-c2f27cd479aa845e0312c18cdb92dc89.ctex"
+uid="uid://ddom4oq40kimp"
+path="res://.godot/imported/stoneTiles_rescaled.png-440f326544ca085d270264c1f803c968.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/air_primitive_sheet.png"
-dest_files=["res://.godot/imported/air_primitive_sheet.png-c2f27cd479aa845e0312c18cdb92dc89.ctex"]
+source_file="res://Assets/Sprites/Tilesets/stoneTiles_rescaled.png"
+dest_files=["res://.godot/imported/stoneTiles_rescaled.png-440f326544ca085d270264c1f803c968.ctex"]
 
 [params]
 

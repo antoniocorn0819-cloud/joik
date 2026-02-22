@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://dv0dwapmn6c61"
-path="res://.godot/imported/Splash_Quiet-1.wav-31e59dad2330f223158dc1ed8deca6f4.sample"
+path="res://.godot/imported/Splash_Quiet-1.wav-f592567cae4f4e6080a38524641a7bf9.sample"
 
 [deps]
 
-source_file="res://Assets/Sounds/Splash In/Splash_Quiet-1.wav"
-dest_files=["res://.godot/imported/Splash_Quiet-1.wav-31e59dad2330f223158dc1ed8deca6f4.sample"]
+source_file="res://Assets/Sounds/Splash/Splash_Quiet-1.wav"
+dest_files=["res://.godot/imported/Splash_Quiet-1.wav-f592567cae4f4e6080a38524641a7bf9.sample"]
 
 [params]
 

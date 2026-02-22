@@ -1,12 +1,10 @@
 extends Node
 
 
-func death_manager() -> Vector2:
-	var x
-	var y
+func death_manager(id: int) -> Vector2:
+	var checkpoint_position
 	for child in get_children():
-		if child.id == Master.current_checkpoint_id:
-			x = child.position.x
-			y = child.position.y
+		if child.id == id:
+			checkpoint_position = child.position
 			break
-	return Vector2(x,y)
+	return checkpoint_position

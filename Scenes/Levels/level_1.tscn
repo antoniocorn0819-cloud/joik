@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://cqa505ip6po44"]
+
+[ext_resource type="PackedScene" uid="uid://bkc0r8yj3yelf" path="res://Scenes/Elements/CharacterCamera.tscn" id="1_iixi8"]
+[ext_resource type="PackedScene" uid="uid://55dmg6q55rrk" path="res://Scenes/Elements/WaterTiles.tscn" id="2_cyadu"]
+[ext_resource type="PackedScene" uid="uid://bi12e2c1bkbyj" path="res://Scenes/Elements/ResetTiles.tscn" id="3_xgxfi"]
+[ext_resource type="PackedScene" uid="uid://6vc8vp8uc5vm" path="res://Scenes/Elements/SolidTiles.tscn" id="4_5f3p6"]
+
+[node name="Level 1" type="Node2D" unique_id=514858547]
+
+[node name="CharacterCamera" parent="." unique_id=1842549794 instance=ExtResource("1_iixi8")]
+
+[node name="WaterTiles" parent="." unique_id=529502083 instance=ExtResource("2_cyadu")]
+tile_map_data = PackedByteArray()
+
+[node name="ResetTiles" parent="." unique_id=1253896724 instance=ExtResource("3_xgxfi")]
+
+[node name="SolidTiles" parent="." unique_id=565262231 instance=ExtResource("4_5f3p6")]

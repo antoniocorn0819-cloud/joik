@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cdxxywf3t3ky6"
-path="res://.godot/imported/water_primitive_sheet.png-941c4f05a375c5b84c698ee72726e3d5.ctex"
+uid="uid://bdv5ypujft84y"
+path="res://.godot/imported/wall_primitive_texture.png-c6ecfd89920d2f3c9629628b5543b35a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/water_primitive_sheet.png"
-dest_files=["res://.godot/imported/water_primitive_sheet.png-941c4f05a375c5b84c698ee72726e3d5.ctex"]
+source_file="res://Assets/Dump/wall_primitive_texture.png"
+dest_files=["res://.godot/imported/wall_primitive_texture.png-c6ecfd89920d2f3c9629628b5543b35a.ctex"]
 
 [params]
 

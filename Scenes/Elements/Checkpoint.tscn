@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://cmfahrx148ndp"]
+[gd_scene format=3 uid="uid://cmfahrx148ndp"]
 
 [ext_resource type="Texture2D" uid="uid://bddv601q81d7l" path="res://icon.svg" id="1_ir6d7"]
 [ext_resource type="Script" uid="uid://c61bfv2d32546" path="res://Scripts/checkpoint.gd" id="1_yt2a0"]
@@ -6,19 +6,21 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yt2a0"]
 size = Vector2(320, 316)
 
-[node name="Checkpoint" type="Area2D"]
+[node name="Checkpoint" type="Area2D" unique_id=859547289]
+z_index = -2
 collision_layer = 0
 script = ExtResource("1_yt2a0")
+id = null
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1586073621]
 shape = SubResource("RectangleShape2D_yt2a0")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=546259863]
 modulate = Color(4.0048027, 4.0048027, 4.0048027, 0.39215687)
 scale = Vector2(2.3125, 2.3125)
 texture = ExtResource("1_ir6d7")
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="." unique_id=1814091060]
 offset_left = -23.0
 offset_top = -66.0
 offset_right = 32.0

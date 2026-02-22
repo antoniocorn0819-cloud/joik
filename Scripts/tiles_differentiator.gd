@@ -1,3 +1,3 @@
 extends TileMapLayer
 
-@export var local_type: Master.Type
+@export var local_type: Constants.CollisionTypes

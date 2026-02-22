@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://d17rft0juimnc"]
+
+[ext_resource type="Texture2D" uid="uid://se4wx4xx3tua" path="res://Assets/Sprites/Particles/sparks_primative.png" id="1_smmbh"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_k717i"]
+particles_animation = true
+particles_anim_h_frames = 9
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_obvl5"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 1.0
+direction = Vector3(0, 0, 0)
+spread = 180.0
+initial_velocity_min = 95.14
+initial_velocity_max = 322.06
+gravity = Vector3(0, 2, 0)
+damping_min = 73.191
+damping_max = 91.15
+anim_speed_min = 0.69
+anim_speed_max = 1.4699999
+
+[node name="CheckpointExplosion" type="GPUParticles2D" unique_id=2086241155]
+z_index = -1
+material = SubResource("CanvasItemMaterial_k717i")
+emitting = false
+amount = 60
+texture = ExtResource("1_smmbh")
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_obvl5")

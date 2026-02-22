@@ -1,103 +1,110 @@
 extends CharacterBody2D
 
-# unimportant stuff
-const ZOOMINCREMENT: float = 0.05
-const ZOOMMAX: float = 1.0
-const ZOOMMIN: float = 0.25
+## CHANGE TO INITIAL CHECK
+var movement_state: Constants.MovementStates = Constants.MovementStates.Air
 
-const COLISION_VELOCITY_THRESHOLD: float = 200
+## id of current checkpoint for respawning
+var current_checkpoint_id: int = 0
 
+# references to various child nodes
 
-# states which fish can be in
-enum State {
-		Water, Air
-}
-
-#CHANGE TO INITIAL CHECK
-var game_state: State = State.Air
-
-# pixels per second squared
-const ACCELERATION: float = 1200.0
-const GRAVITY: float = 1200.0
-# gets reference to detector child
+## stores reference to Area2d needed for non colliding detection
 @onready var detector: Area2D = $"Water Detector"
+
+## stores reference to Camera2d needed for changes in zoom
 @onready var camera: Camera2D = $Camera2D
-@onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
+
+## stores reference to AnimationPlayer needed for playing animations
+@onready var animator: AnimationPlayer = $AnimationPlayer
+
+## stores reference to GPUParticles2D child which is used for creating the bubble trail
 @onready var particle_emitter: GPUParticles2D = $GPUParticles2D
+
+
+## exports reference to external checkpoint manager
 @export var checkpointManager: Node
 
 
-# passes respawn location
-# TYPE INDICATIORS
-func respawn_handler() -> void:
-	position = checkpointManager.death_manager()
-	velocity = Vector2(0,0)
-	
-#stupid shit for sound calculation
+
+
+## variable for collision magnitude detection
 var cumulative_velocity_difference: float = 0.0
 
-
+## variable for input detection
 var pressing: bool = false
 
+
+
+## handles movement code
 func _physics_process(delta: float) -> void:
 # move to _input handler
 	pressing = Input.is_action_pressed("move")
 	
-	match game_state:
-		State.Water:
+	match movement_state:
+		Constants.MovementStates.Water:
 			# REWRITE JANK
 			if pressing:
-				velocity += ACCELERATION * delta * ((get_global_mouse_position() - global_position).normalized())
-		State.Air:
-			# CHANGE TO CONSTANT
+				velocity += Constants.movement.ACCELERATION * delta * ((get_global_mouse_position() - global_position).normalized())
+		Constants.MovementStates.Air:
 			if not is_on_floor():
-				velocity.y += GRAVITY * delta	
+				velocity.y += Constants.movement.GRAVITY * delta	
+				
 	# visual changes
 	look_at(get_global_mouse_position())
-	# processes physics
 	
+
 
 	var old_velocity_magnitude = get_real_velocity().length()
 	
+	# processes physics
 	move_and_slide()
 	
-	# stupid shit for sound and animation
-	# calculates cumuluative change in velocity during collision and passes it to the hit player function
-	var velocity_difference = old_velocity_magnitude - get_real_velocity().length()
-	if velocity_difference > COLISION_VELOCITY_THRESHOLD:
-		cumulative_velocity_difference += velocity_difference
-	elif cumulative_velocity_difference > COLISION_VELOCITY_THRESHOLD:
-		audio_hit_player(cumulative_velocity_difference, game_state)
-		cumulative_velocity_difference = 0.0
+	# calculates swim sfx and vfx every frame
+	swim_handler()
 	
-	animation_handler()
+	# collision magnitude detection code only needed for vfx and sfx
+	# I would move it, but it is more convenient here
+	
+	# gets difference in velocity magnitudes before and after frame
+	var velocity_difference = old_velocity_magnitude - get_real_velocity().length()
+	# if the difference is large enough, it is added to the total
+	if velocity_difference > Constants.sfx.COLISION_VELOCITY_THRESHOLD:
+		cumulative_velocity_difference += velocity_difference
+	# if it is not, the cumulative velocity difference is checked, passed to the hit handler, and reset
+	elif cumulative_velocity_difference > Constants.sfx.COLISION_VELOCITY_THRESHOLD:
+		hit_handler(cumulative_velocity_difference, movement_state)
+		cumulative_velocity_difference = 0.0
 
 
 
-# detects collisions on layer 3 (passthrough layer)
+## detects entering collisions on layer 3 (passthrough layer)
 func _on_water_detector_body_entered(body) -> void:
 	# checks type of tilemap
 	# MAKE SEPERATE FUNCTION
 	match body.local_type:
-		Master.Type.Water:
-			game_state = State.Water
+		Constants.CollisionTypes.Water:
+			movement_state = Constants.MovementStates.Water
 			#water sfx decider
-			audio_splash_player(velocity.length())
-				
-		Master.Type.Reset:
+			splash_handler(velocity, position)
+			#OMG BRO FIX THIS
+			
+			
+		Constants.CollisionTypes.Reset:
 			respawn_handler()
 
 
 
-# detects collisions on layer 3 (passthrough layer)
+## detects exiting collisions on layer 3 (passthrough layer)
 func _on_water_detector_body_exited(body) -> void:
 	# if there are no overlapping bodies, fish is in air
 	# MAKE SEPERATE FUNCTION
 	if !detector.get_overlapping_bodies():
-		game_state = State.Air
+		movement_state = Constants.MovementStates.Air
+		plop_handler(velocity, position)
 
 
-# detects reset input
+
+## detects reset and zoom input and handles zoom calculations
 func _input(event) -> void:
 	if event.is_action_pressed("reset_player"):
 		respawn_handler()
@@ -105,56 +112,128 @@ func _input(event) -> void:
 	# zoom controls
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_WHEEL_UP and event.pressed:
-			if camera.zoom.x < ZOOMMAX:
-				camera.zoom += Vector2(ZOOMINCREMENT, ZOOMINCREMENT)
+			if camera.zoom.x < Constants.control.ZOOM_MAX:
+				camera.zoom += Constants.control.ZOOM_INCREMENT
 			else:
-				camera.zoom = Vector2(ZOOMMAX,ZOOMMAX)
+				camera.zoom = Vector2(Constants.control.ZOOM_MAX, Constants.control.ZOOM_MAX)
 		if event.button_index == MOUSE_BUTTON_WHEEL_DOWN and event.pressed:
-			if camera.zoom.x > ZOOMMIN:
-				camera.zoom -= Vector2(ZOOMINCREMENT, ZOOMINCREMENT)
+			if camera.zoom.x > Constants.control.ZOOM_MIN:
+				camera.zoom -= Constants.control.ZOOM_INCREMENT
 			else:
-				camera.zoom = Vector2(ZOOMMIN,ZOOMMIN)
+				camera.zoom = Vector2(Constants.control.ZOOM_MIN,Constants.control.ZOOM_MIN)
 
 
-# self explanitory
-func animation_handler() -> void:
+
+## respawns player using checkpoint manager
+func respawn_handler() -> void:
+	position = checkpointManager.death_manager(current_checkpoint_id)
+	velocity = Vector2(0,0)
+
+
+
+# CODE PAST THIS POINT IS FOR SFX AND VFX
+#---------------------------------------------------------------------------------------------------
+
+
+## handles swim related sfx and vfx
+func swim_handler() -> void:
 	if pressing:
-		sprite.animation = "swim"
+		animator.current_animation = "swim"
 		particle_emitter.emitting = false
-		if game_state == State.Water:
+		if movement_state == Constants.MovementStates.Water:
 			particle_emitter.emitting = true
 	else:
-		sprite.animation = "idle"
+		animator.current_animation = "idle"
 		particle_emitter.emitting = false
 
 
-# really uninmportant values for SFX
-const LOUDSPLASH: float = 2400.0
-const MEDIUMSPLASH: float = 1200.0
 
-const LOUDHIT: float = 3000.0
-const MEDIUMHIT: float = 1500.0
-const QUIETHIT: float = 300.0
-
-
-func audio_splash_player(magnitude: float) -> void:
-	if magnitude > LOUDSPLASH:
+## handles splash related sfx and vfx
+func splash_handler(fish_velocity: Vector2, fish_position: Vector2) -> void:
+	
+	# code for vfx
+	
+	# calculates modifier (1.0 being neutral) for explosion velocity
+	var explosion_modifier: float = fish_velocity.length() * Constants.vfx.BUBBLE_VELOCITY_CONVERTER
+	
+	# calculates offset for explosion position to account for hitbox radius
+	var offset: Vector2 = fish_velocity.normalized() * Constants.vfx.DETECTOR_RADIUS
+	
+	# creates bubble explosion
+	bubble_explosion_creator(fish_position + offset, fish_velocity.normalized(), explosion_modifier)
+	
+	# code for sfx
+	
+	var magnitude = fish_velocity.length()
+	if magnitude > Constants.sfx.SPLASH_LOUD_THRESHOLD:
 		Audiomanager.play_sound(position, Audiomanager.Sound_Type.Splash_Loud)
-	elif magnitude > MEDIUMSPLASH:
+	elif magnitude > Constants.sfx.SPLASH_MEDIUM_THRESHOLD:
 		Audiomanager.play_sound(position, Audiomanager.Sound_Type.Splash_Medium)
 	else:
 		Audiomanager.play_sound(position, Audiomanager.Sound_Type.Splash_Quiet)
 
 
-func audio_hit_player(magnitude: float, state: State) -> void:
+
+## handles plop related vfx and sfx
+func plop_handler(fish_velocity: Vector2, fish_position: Vector2) -> void:
+	
+	# code for vfx mostly copied from splash handler
+	
+	# calculates modifier (1.0 being neutral) for explosion velocity
+	var explosion_modifier: float = fish_velocity.length() * Constants.vfx.BUBBLE_VELOCITY_CONVERTER
+	
+	# calculates offset for explosion position to account for hitbox radius
+	var offset: Vector2 = fish_velocity.normalized() * Constants.vfx.DETECTOR_RADIUS
+	
+	# creates bubble explosion (direction reversed from velocity)
+	bubble_explosion_creator(fish_position - offset, (fish_velocity.normalized() * -1), explosion_modifier)
+
+
+
+## handles hit related sfx and vfx
+func hit_handler(magnitude: float, state: Constants.MovementStates) -> void:
 	# underwater bus code
 	var bus = "Master"
-	if state == State.Water:
+	if state == Constants.MovementStates.Water:
 		bus = "Underwater"
 	
-	if magnitude > LOUDHIT:
+	if magnitude > Constants.sfx.HIT_LOUD_THRESHOLD:
 		Audiomanager.play_sound(position, Audiomanager.Sound_Type.Hit_Quiet, bus)
-	elif magnitude > MEDIUMHIT:
+	elif magnitude > Constants.sfx.HIT_MEDIUM_THRESHOLD:
 		Audiomanager.play_sound(position, Audiomanager.Sound_Type.Hit_Medium, bus)
-	elif magnitude > QUIETHIT:
+	elif magnitude > Constants.sfx.HIT_QUIET_THRESHOLD:
 		Audiomanager.play_sound(position, Audiomanager.Sound_Type.Hit_Loud, bus)
+
+
+
+## generates bubble explosion particle effects
+func bubble_explosion_creator(explosion_position: Vector2, direction:Vector2, velocity_modifier: float) -> void:
+	# REWORK BRO
+	# GO BACK AND ADD REAL VELOCITY FUNCTIONALITY
+ 
+	var modified_vector:Vector2 = direction
+	var weird_vector:Vector3 = Vector3(modified_vector.x, modified_vector.y, 0)
+	
+	var explosion = Constants.particles.BubbleExplosion.instantiate()
+	explosion.process_material.direction = weird_vector
+	explosion.position = explosion_position
+	
+	#print(explosion.process_material.initial_velocity_max)
+	#explosion.process_material.initial_velocity_min *= modifier
+	#explosion.process_material.initial_velocity_max *= modifier
+	#print(explosion.process_material.initial_velocity_max)
+	
+	explosion.finished.connect(explosion.queue_free)
+	
+	get_tree().root.add_child(explosion)
+	explosion.emitting = true
+#
+
+
+## swim audio player for animation to call
+func audio_swim_player() -> void:
+	match movement_state:
+		Constants.MovementStates.Water:
+			Audiomanager.play_sound(position, Audiomanager.Sound_Type.Swim, "Underwater")
+		Constants.MovementStates.Air:
+			Audiomanager.play_sound(position, Audiomanager.Sound_Type.Swim)

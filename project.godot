@@ -27,6 +27,7 @@ buses/default_bus_layout="uid://cntdyuuaqm2q6"
 
 Master="*res://Scripts/MASTER.gd"
 Audiomanager="*uid://bn87wn6so3xov"
+Constants="*uid://i1h61g1g6dgy"
 
 [input]
 

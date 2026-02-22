@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://da8v37dfccdh3"
-path="res://.godot/imported/fish_primitive.png-03f3741a8c634abd6a1b2b8feb4a5e0e.ctex"
+uid="uid://se4wx4xx3tua"
+path="res://.godot/imported/sparks_primative.png-624e51b8bafa6ec36630335a68949bd7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/fish_primitive.png"
-dest_files=["res://.godot/imported/fish_primitive.png-03f3741a8c634abd6a1b2b8feb4a5e0e.ctex"]
+source_file="res://Assets/Sprites/Particles/sparks_primative.png"
+dest_files=["res://.godot/imported/sparks_primative.png-624e51b8bafa6ec36630335a68949bd7.ctex"]
 
 [params]
 
