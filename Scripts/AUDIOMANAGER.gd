@@ -9,7 +9,8 @@ enum Sound_Type {
 	Hit_Medium,
 	Hit_Loud,
 	Swim,
-	Checkpoint
+	Checkpoint,
+	Plop
 }
 
 ## dictionary that stores arrays of sounds with keys of sound types
@@ -50,7 +51,13 @@ const sound_library: Dictionary[Sound_Type, Variant] = {
 	
 	Sound_Type.Checkpoint: [
 		preload("res://Assets/Sounds/Misc/Checkpoint.wav")
-	]
+	],
+	
+	Sound_Type.Plop: [
+		preload("res://Assets/Sounds/Plop/Plop-1.wav"),
+		preload("res://Assets/Sounds/Plop/Plop-2.wav"),
+		preload("res://Assets/Sounds/Plop/Plop-3.wav")
+	],
 }
 
 

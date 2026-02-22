@@ -2,9 +2,9 @@
 
 [ext_resource type="PackedScene" uid="uid://bkc0r8yj3yelf" path="res://Scenes/Elements/CharacterCamera.tscn" id="1_cmdsc"]
 [ext_resource type="Script" uid="uid://b4oafkuhh8cyq" path="res://Scripts/checkpoint_manager.gd" id="3_0fow4"]
-[ext_resource type="PackedScene" uid="uid://55dmg6q55rrk" path="res://Scenes/Elements/WaterTiles.tscn" id="3_oopcs"]
-[ext_resource type="PackedScene" uid="uid://6vc8vp8uc5vm" path="res://Scenes/Elements/SolidTiles.tscn" id="4_0fow4"]
-[ext_resource type="PackedScene" uid="uid://bi12e2c1bkbyj" path="res://Scenes/Elements/ResetTiles.tscn" id="4_6kv1d"]
+[ext_resource type="PackedScene" uid="uid://55dmg6q55rrk" path="res://Scenes/Elements/Old tiles/WaterTiles.tscn" id="3_oopcs"]
+[ext_resource type="PackedScene" uid="uid://6vc8vp8uc5vm" path="res://Scenes/Elements/Old tiles/SolidTiles.tscn" id="4_0fow4"]
+[ext_resource type="PackedScene" uid="uid://bi12e2c1bkbyj" path="res://Scenes/Elements/Old tiles/ResetTiles.tscn" id="4_6kv1d"]
 [ext_resource type="PackedScene" uid="uid://cmfahrx148ndp" path="res://Scenes/Elements/Checkpoint.tscn" id="4_msn6r"]
 
 [node name="Testing World" type="Node2D" unique_id=396042610]

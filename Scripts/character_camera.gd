@@ -4,7 +4,7 @@ extends CharacterBody2D
 var movement_state: Constants.MovementStates = Constants.MovementStates.Air
 
 ## id of current checkpoint for respawning
-var current_checkpoint_id: int = 0
+var current_checkpoint_id: int = 1
 
 # references to various child nodes
 
@@ -77,21 +77,24 @@ func _physics_process(delta: float) -> void:
 
 
 
-## detects entering collisions on layer 3 (passthrough layer)
+## detects entering physics collisions on layer 3 (passthrough layer)
 func _on_water_detector_body_entered(body) -> void:
 	# checks type of tilemap
-	# MAKE SEPERATE FUNCTION
+	# ADD FAIL CASE TO THIS AND OTHER FUNCTION
 	match body.local_type:
 		Constants.CollisionTypes.Water:
 			movement_state = Constants.MovementStates.Water
-			#water sfx decider
 			splash_handler(velocity, position)
-			#OMG BRO FIX THIS
-			
-			
 		Constants.CollisionTypes.Reset:
 			respawn_handler()
 
+## detects entering Area2D collisions on layer 3 (passthrrough layer)
+func _on_detector_area_entered(area):
+	match area.local_type:
+		Constants.CollisionTypes.Bounce:
+			# temporary solution
+			var angle = (2 * area.rotation) - velocity.angle()
+			velocity = Vector2.from_angle(angle) * velocity.length()
 
 
 ## detects exiting collisions on layer 3 (passthrough layer)
@@ -132,6 +135,7 @@ func respawn_handler() -> void:
 
 
 # CODE PAST THIS POINT IS FOR SFX AND VFX
+
 #---------------------------------------------------------------------------------------------------
 
 
@@ -187,6 +191,9 @@ func plop_handler(fish_velocity: Vector2, fish_position: Vector2) -> void:
 	
 	# creates bubble explosion (direction reversed from velocity)
 	bubble_explosion_creator(fish_position - offset, (fish_velocity.normalized() * -1), explosion_modifier)
+	
+	# code for sfx
+	Audiomanager.play_sound(fish_position, Audiomanager.Sound_Type.Plop)
 
 
 
@@ -227,7 +234,7 @@ func bubble_explosion_creator(explosion_position: Vector2, direction:Vector2, ve
 	
 	get_tree().root.add_child(explosion)
 	explosion.emitting = true
-#
+
 
 
 ## swim audio player for animation to call

@@ -231,7 +231,7 @@ _data = {
 }
 
 [node name="CharacterCamera" type="CharacterBody2D" unique_id=1842549794]
-collision_mask = 0
+collision_mask = 2
 script = ExtResource("1_7k2ti")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1622091940]
@@ -270,6 +270,6 @@ shape = SubResource("CircleShape2D_7k2ti")
 libraries/ = SubResource("AnimationLibrary_0ikj3")
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]
-[connection signal="area_entered" from="Water Detector" to="." method="_on_water_detector_area_entered"]
+[connection signal="area_entered" from="Water Detector" to="." method="_on_detector_area_entered"]
 [connection signal="body_entered" from="Water Detector" to="." method="_on_water_detector_body_entered"]
 [connection signal="body_exited" from="Water Detector" to="." method="_on_water_detector_body_exited"]

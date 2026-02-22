@@ -8,7 +8,7 @@ enum MovementStates {
 
 ## enumerator for collision detection code
 enum CollisionTypes {
-	Water, Reset
+	Water, Reset, Bounce
 }
 
 
