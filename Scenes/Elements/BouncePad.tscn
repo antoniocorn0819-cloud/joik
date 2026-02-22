@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bddv601q81d7l" path="res://icon.svg" id="2_di2v5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ropvq"]
-size = Vector2(286, 34)
+size = Vector2(536, 156)
 
 [node name="BouncePad" type="Area2D" unique_id=1429291516]
 collision_layer = 4
@@ -12,7 +12,7 @@ collision_mask = 0
 script = ExtResource("1_fi7df")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=521490980]
-scale = Vector2(2.328125, 0.359375)
+scale = Vector2(4.5468745, 1.375)
 texture = ExtResource("2_di2v5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=571155746]

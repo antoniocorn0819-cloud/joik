@@ -48,11 +48,22 @@ const sfx: Dictionary[String, Variant] = {
 	# for splash
 	"SPLASH_LOUD_THRESHOLD": 2400.0,
 	"SPLASH_MEDIUM_THRESHOLD": 1200.0,
+	# technically for both vfx and sfx
+	# FIDDLE WITH NUMBER
+	"SPLASH_THRESHOLD": 150.0,
+	
+	#for plop
+	# technically for both sfx and vfx
+	"PLOP_THRESHOLD": 150.0,
 	
 	# for hit
 	"HIT_LOUD_THRESHOLD": 3000.0,
 	"HIT_MEDIUM_THRESHOLD": 1500.0,
-	"HIT_QUIET_THRESHOLD": 300.0
+	"HIT_QUIET_THRESHOLD": 300.0,
+	
+	# for boing
+	"BOING_LOUD_THRESHOLD": 2500.0,
+	"BOING_MEDIUM_THRESHOLD": 1200.0,
 }
 
 ## constants of preloaded particle effect scenes

@@ -8,9 +8,12 @@ enum Sound_Type {
 	Hit_Quiet,
 	Hit_Medium,
 	Hit_Loud,
+	Boing_Quiet,
+	Boing_Medium,
+	Boing_Loud,
 	Swim,
 	Checkpoint,
-	Plop
+	Plop,
 }
 
 ## dictionary that stores arrays of sounds with keys of sound types
@@ -57,6 +60,24 @@ const sound_library: Dictionary[Sound_Type, Variant] = {
 		preload("res://Assets/Sounds/Plop/Plop-1.wav"),
 		preload("res://Assets/Sounds/Plop/Plop-2.wav"),
 		preload("res://Assets/Sounds/Plop/Plop-3.wav")
+	],
+	
+	Sound_Type.Boing_Quiet: [
+		preload("res://Assets/Sounds/Boing/Boing_Quiet-1.wav"),
+		preload("res://Assets/Sounds/Boing/Boing_Quiet-2.wav"),
+		preload("res://Assets/Sounds/Boing/Boing_Quiet-3.wav")
+	],
+	
+	Sound_Type.Boing_Medium: [
+		preload("res://Assets/Sounds/Boing/Boing_Medium-1.wav"),
+		preload("res://Assets/Sounds/Boing/Boing_Medium-2.wav"),
+		preload("res://Assets/Sounds/Boing/Boing_Medium-3.wav")
+	],
+	
+	Sound_Type.Boing_Loud: [
+		preload("res://Assets/Sounds/Boing/Boing_Loud-1.wav"),
+		preload("res://Assets/Sounds/Boing/Boing_Loud-2.wav"),
+		preload("res://Assets/Sounds/Boing/Boing_Loud-3.wav")
 	],
 }
 

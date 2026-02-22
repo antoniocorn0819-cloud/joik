@@ -4,7 +4,7 @@ extends CharacterBody2D
 var movement_state: Constants.MovementStates = Constants.MovementStates.Air
 
 ## id of current checkpoint for respawning
-var current_checkpoint_id: int = 1
+var current_checkpoint_id: int = 5
 
 # references to various child nodes
 
@@ -51,10 +51,11 @@ func _physics_process(delta: float) -> void:
 				
 	# visual changes
 	look_at(get_global_mouse_position())
-	
 
 
-	var old_velocity_magnitude = get_real_velocity().length()
+
+
+	var old_velocity_magnitude = velocity.length()
 	
 	# processes physics
 	move_and_slide()
@@ -66,7 +67,7 @@ func _physics_process(delta: float) -> void:
 	# I would move it, but it is more convenient here
 	
 	# gets difference in velocity magnitudes before and after frame
-	var velocity_difference = old_velocity_magnitude - get_real_velocity().length()
+	var velocity_difference = old_velocity_magnitude - velocity.length()
 	# if the difference is large enough, it is added to the total
 	if velocity_difference > Constants.sfx.COLISION_VELOCITY_THRESHOLD:
 		cumulative_velocity_difference += velocity_difference
@@ -95,6 +96,8 @@ func _on_detector_area_entered(area):
 			# temporary solution
 			var angle = (2 * area.rotation) - velocity.angle()
 			velocity = Vector2.from_angle(angle) * velocity.length()
+			
+			boing_handler(velocity, position, movement_state )
 
 
 ## detects exiting collisions on layer 3 (passthrough layer)
@@ -129,9 +132,9 @@ func _input(event) -> void:
 
 ## respawns player using checkpoint manager
 func respawn_handler() -> void:
+	#TRY FIXING SPLASH SOUNDS SOMEHOW
 	position = checkpointManager.death_manager(current_checkpoint_id)
 	velocity = Vector2(0,0)
-
 
 
 # CODE PAST THIS POINT IS FOR SFX AND VFX
@@ -154,11 +157,16 @@ func swim_handler() -> void:
 
 ## handles splash related sfx and vfx
 func splash_handler(fish_velocity: Vector2, fish_position: Vector2) -> void:
+	# breaks if splash is too tiny
+	var magnitude = fish_velocity.length()
+	
+	if magnitude < Constants.sfx.SPLASH_THRESHOLD:
+		return
 	
 	# code for vfx
 	
 	# calculates modifier (1.0 being neutral) for explosion velocity
-	var explosion_modifier: float = fish_velocity.length() * Constants.vfx.BUBBLE_VELOCITY_CONVERTER
+	var explosion_modifier: float = magnitude * Constants.vfx.BUBBLE_VELOCITY_CONVERTER
 	
 	# calculates offset for explosion position to account for hitbox radius
 	var offset: Vector2 = fish_velocity.normalized() * Constants.vfx.DETECTOR_RADIUS
@@ -168,7 +176,7 @@ func splash_handler(fish_velocity: Vector2, fish_position: Vector2) -> void:
 	
 	# code for sfx
 	
-	var magnitude = fish_velocity.length()
+	
 	if magnitude > Constants.sfx.SPLASH_LOUD_THRESHOLD:
 		Audiomanager.play_sound(position, Audiomanager.Sound_Type.Splash_Loud)
 	elif magnitude > Constants.sfx.SPLASH_MEDIUM_THRESHOLD:
@@ -180,11 +188,16 @@ func splash_handler(fish_velocity: Vector2, fish_position: Vector2) -> void:
 
 ## handles plop related vfx and sfx
 func plop_handler(fish_velocity: Vector2, fish_position: Vector2) -> void:
+	# breaks if plop is too tiny
+	var magnitude = fish_velocity.length()
+	
+	if magnitude < Constants.sfx.PLOP_THRESHOLD:
+		return
 	
 	# code for vfx mostly copied from splash handler
 	
 	# calculates modifier (1.0 being neutral) for explosion velocity
-	var explosion_modifier: float = fish_velocity.length() * Constants.vfx.BUBBLE_VELOCITY_CONVERTER
+	var explosion_modifier: float = magnitude * Constants.vfx.BUBBLE_VELOCITY_CONVERTER
 	
 	# calculates offset for explosion position to account for hitbox radius
 	var offset: Vector2 = fish_velocity.normalized() * Constants.vfx.DETECTOR_RADIUS
@@ -211,6 +224,21 @@ func hit_handler(magnitude: float, state: Constants.MovementStates) -> void:
 	elif magnitude > Constants.sfx.HIT_QUIET_THRESHOLD:
 		Audiomanager.play_sound(position, Audiomanager.Sound_Type.Hit_Loud, bus)
 
+
+
+func boing_handler(fish_velocity: Vector2, fish_position: Vector2, state: Constants.MovementStates) -> void:
+	
+	var bus = "Master"
+	if state == Constants.MovementStates.Water:
+		bus = "Underwater"
+	
+	var magnitude = fish_velocity.length()
+	if magnitude > Constants.sfx.BOING_LOUD_THRESHOLD:
+		Audiomanager.play_sound(position, Audiomanager.Sound_Type.Boing_Loud, bus)
+	elif magnitude > Constants.sfx.BOING_MEDIUM_THRESHOLD:
+		Audiomanager.play_sound(position, Audiomanager.Sound_Type.Boing_Medium, bus)
+	else:
+		Audiomanager.play_sound(position, Audiomanager.Sound_Type.Boing_Quiet, bus)
 
 
 ## generates bubble explosion particle effects
