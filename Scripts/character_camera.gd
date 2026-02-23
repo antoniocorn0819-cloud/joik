@@ -4,7 +4,7 @@ extends CharacterBody2D
 var movement_state: Constants.MovementStates = Constants.MovementStates.Air
 
 ## id of current checkpoint for respawning
-var current_checkpoint_id: int = 1
+var current_checkpoint_id: int = 7
 
 # references to various child nodes
 
