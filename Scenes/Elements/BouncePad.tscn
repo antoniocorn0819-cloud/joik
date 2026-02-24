@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bddv601q81d7l" path="res://icon.svg" id="2_di2v5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ropvq"]
-size = Vector2(362, 110)
+size = Vector2(418, 156)
 
 [node name="BouncePad" type="Area2D" unique_id=1429291516]
 collision_layer = 4

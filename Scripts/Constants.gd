@@ -71,3 +71,10 @@ const particles = {
 	"BubbleExplosion" = preload("res://Scenes/Particle Effects/BubbleExplosion.tscn"),
 	"CheckpointExploision" = preload("res://Scenes/Particle Effects/CheckpointExplosion.tscn")
 }
+
+## checkpoints for level 1
+const level1: Dictionary[int, String] = {
+	1: "Try the bouncepad!",
+	2: "Let's Bounce / Elastic Collisions",
+	3: "Launching Potential"
+}
