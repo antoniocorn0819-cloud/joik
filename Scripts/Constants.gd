@@ -72,9 +72,56 @@ const particles = {
 	"CheckpointExploision" = preload("res://Scenes/Particle Effects/CheckpointExplosion.tscn")
 }
 
-## checkpoints for level 1
+## rework level (it sucks)
+const prologue: Dictionary[int, String] = {
+	# 
+	1: "",
+	# 
+	2: "",
+	# 1 I think this one is a bit too simple. It works well to demonstrate the potential of bouncepads in cramped spaces.
+	3: "",
+	# 2 This one is a must have but needs to be reworked.
+	4: "",
+	# 2 This one is just too boring in this state. The last jump is interesting though
+	5: "",
+	# 0 This one is so clean but these levls are honestly too short. I need a way to make these level longer
+	6: "",
+	# In progress
+	7: "",
+	#
+	8: "",
+	#
+	9: "",
+	#
+	10: "",
+	#
+	11: "",
+	
+}
+
+
 const level1: Dictionary[int, String] = {
+	# 0 No thoughts really.
 	1: "Try the bouncepad!",
+	# 1 I think this one works pretty well to demonstrate elastic collisions. End part is cool but might need to be cut.
 	2: "Let's Bounce / Elastic Collisions",
-	3: "Launching Potential"
+	# 1 I think this one is a bit too simple. It works well to demonstrate the potential of bouncepads in cramped spaces.
+	3: "Launching Potential",
+	# 2 This one is a must have but needs to be reworked.
+	4: "Particle Accelerator",
+	# 2 This one is just too boring in this state. The last jump is interesting though
+	5: "Higher & Higher",
+	# 0 This one is so clean but these levls are honestly too short. I need a way to make these level longer
+	6: "Fliparound",
+	# In progress
+	7: "The angler",
+	#
+	8: "",
+	#
+	9: "",
+	#
+	10: "",
+	#
+	11: "",
+	
 }

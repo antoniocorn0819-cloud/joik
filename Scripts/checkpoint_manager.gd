@@ -2,7 +2,7 @@ extends Node
 
 #ADD CASE FOR NO CHECKPOINT FOUND
 func death_manager(id: int) -> Vector2:
-	var checkpoint_position
+	var checkpoint_position: Vector2
 	for child in get_children():
 		if child.id == id:
 			checkpoint_position = child.position
