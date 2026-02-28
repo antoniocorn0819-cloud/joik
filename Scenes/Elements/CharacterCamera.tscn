@@ -1,13 +1,13 @@
 [gd_scene format=3 uid="uid://bkc0r8yj3yelf"]
 
 [ext_resource type="Script" uid="uid://ctqohev1ni6gw" path="res://Scripts/States/player.gd" id="1_fgyvi"]
-[ext_resource type="Script" uid="uid://de6v5bw2rx3n" path="res://Scenes/Elements/character_data.gd" id="1_nd5vq"]
+[ext_resource type="Script" uid="uid://de6v5bw2rx3n" path="res://Scripts/States/character_data.gd" id="1_nd5vq"]
 [ext_resource type="Texture2D" uid="uid://dd6krc84tkwdm" path="res://Assets/Sprites/Greg/greg_swim_scaled.png" id="2_3dccs"]
 [ext_resource type="Texture2D" uid="uid://dblbms8twwv5l" path="res://Assets/Sprites/Particles/bubble_texture_primitive.png" id="2_61xym"]
 [ext_resource type="Texture2D" uid="uid://bgyxvk08ov2tg" path="res://Assets/Sprites/Greg/greg_idle_scaled.png" id="2_fgyvi"]
 [ext_resource type="Script" uid="uid://c1nkudmra72du" path="res://Scripts/States/moving.gd" id="2_qo28u"]
 [ext_resource type="Script" uid="uid://byuvmuu6nq8qx" path="res://Scripts/States/water.gd" id="3_qo28u"]
-[ext_resource type="Script" uid="uid://cg3lxddkwn3m8" path="res://air.gd" id="4_kvhr5"]
+[ext_resource type="Script" uid="uid://cg3lxddkwn3m8" path="res://Scripts/States/air.gd" id="4_kvhr5"]
 [ext_resource type="Script" uid="uid://b8mnpxk3x3h2q" path="res://Scripts/States/reset.gd" id="5_lg452"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_61xym"]
@@ -235,9 +235,13 @@ _data = {
 &"swim": SubResource("Animation_wbc3l")
 }
 
-[node name="CharacterCamera" type="CharacterBody2D" unique_id=1842549794]
+[node name="CharacterCamera" type="CharacterBody2D" unique_id=1842549794 node_paths=PackedStringArray("camera", "animator", "bubble_emitter", "moving_machine")]
 collision_mask = 2
 script = ExtResource("1_nd5vq")
+camera = NodePath("Camera2D")
+animator = NodePath("AnimationPlayer")
+bubble_emitter = NodePath("GPUParticles2D")
+moving_machine = NodePath("CharacterController/Moving")
 
 [node name="CharacterController" type="Node" parent="." unique_id=1427056529 node_paths=PackedStringArray("character", "default_state")]
 script = ExtResource("1_fgyvi")
