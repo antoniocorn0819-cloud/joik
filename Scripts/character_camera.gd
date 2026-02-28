@@ -28,12 +28,13 @@ var movement_state: Constants.MovementStates = Constants.MovementStates.Air
 
 
 ## variable for collision magnitude detection
-var cumulative_velocity_difference: float = 0.0
+var cumulative_velocity_difference: Vector2 = Vector2(0,0)
 
 ## variable for input detection
 var pressing: bool = false
 
 
+var collision: KinematicCollision2D
 
 ## handles movement code
 func _physics_process(delta: float) -> void:
@@ -55,26 +56,40 @@ func _physics_process(delta: float) -> void:
 
 
 
-	var old_velocity_magnitude = velocity.length()
+	var old_velocity_magnitude = velocity
 	
 	# processes physics
 	move_and_slide()
 	
+	var velocity_difference = old_velocity_magnitude - velocity
+	
+
 	# calculates swim sfx and vfx every frame
 	swim_handler()
 	
-	# collision magnitude detection code only needed for vfx and sfx
+	# collision magnitude detection code only needed for vfx, sfx, and now wall bouncing
 	# I would move it, but it is more convenient here
 	
 	# gets difference in velocity magnitudes before and after frame
-	var velocity_difference = old_velocity_magnitude - velocity.length()
-	# if the difference is large enough, it is added to the total
-	if velocity_difference > Constants.sfx.COLISION_VELOCITY_THRESHOLD:
+	
+	 # if the difference is large enough, it is added to the total
+	if velocity_difference.length() > Constants.sfx.COLISION_VELOCITY_THRESHOLD:
 		cumulative_velocity_difference += velocity_difference
+		if get_slide_collision(0) != null:
+			collision = get_slide_collision(0)
+			
 	# if it is not, the cumulative velocity difference is checked, passed to the hit handler, and reset
-	elif cumulative_velocity_difference > Constants.sfx.COLISION_VELOCITY_THRESHOLD:
-		hit_handler(cumulative_velocity_difference, movement_state)
-		cumulative_velocity_difference = 0.0
+	elif cumulative_velocity_difference.length() > Constants.sfx.COLISION_VELOCITY_THRESHOLD:
+		
+		if collision:
+			velocity = bounce_calculator(velocity, cumulative_velocity_difference, collision.get_normal(), Constants.movement.WALL_BOUNCE_ELASTICITY)
+		hit_handler(cumulative_velocity_difference.length(), movement_state)
+		
+		cumulative_velocity_difference = Vector2(0,0)
+		
+		
+		
+	
 
 
 
@@ -111,10 +126,22 @@ func _on_water_detector_body_exited(body) -> void:
 
 
 ## detects reset and zoom input and handles zoom calculations
+
+
+func bounce_calculator(current_velocity: Vector2,
+ collision_velocity: Vector2, collision_normal: Vector2,
+ collision_elasticity: float, minimum_bounce: float = 0.0) -> Vector2:
+	# pretty simple
+	var magnitude: float = abs(collision_velocity.dot(collision_normal)) * collision_elasticity
+	if magnitude < minimum_bounce:
+		return current_velocity
+	
+	return current_velocity + (collision_normal * magnitude)
+
+
 func _input(event) -> void:
 	if event.is_action_pressed("reset_player"):
 		respawn_handler()
-	
 	# zoom controls
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_WHEEL_UP and event.pressed:
@@ -132,7 +159,6 @@ func _input(event) -> void:
 
 ## respawns player using checkpoint manager
 func respawn_handler() -> void:
-	#TRY FIXING SPLASH SOUNDS SOMEHOW
 	position = checkpointManager.death_manager(current_checkpoint_id)
 	velocity = Vector2(0,0)
 
