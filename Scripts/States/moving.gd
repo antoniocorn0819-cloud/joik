@@ -14,8 +14,10 @@ func enter():
 
 
 
+
 var cumulative_velocity_difference: Vector2 = Vector2(0,0)
 var collision: KinematicCollision2D
+
 
 func physics(delta):
 	current_state.physics(delta)
@@ -31,20 +33,28 @@ func physics(delta):
 	
 	character.swim_handler(Input.is_action_pressed("move"), current_state.identifier)
 	
+	# collision detection for solids
+	
+	if character.get_slide_collision(0) != null:
+			collision = character.get_slide_collision(0)
+			if "local_type" in collision.get_collider():
+				match collision.get_collider().local_type:
+					Constants.CollisionTypes.Reset:
+						Transition.emit(self, Constants.StateIdentifiers.Reset)
+						# disables sound
+						# return
+	
+	
 	# collision magnitude detection code only needed for vfx, sfx, and now wall bouncing
 	# I would move it, but it is more convenient here
 	
 	# gets difference in velocity magnitudes before and after frame
-	
 	 # if the difference is large enough, it is added to the total
 	if velocity_difference.length() > Constants.sfx.COLISION_VELOCITY_THRESHOLD:
 		cumulative_velocity_difference += velocity_difference
-		if character.get_slide_collision(0) != null:
-			collision = character.get_slide_collision(0)
-			
+		
 	# if it is not, the cumulative velocity difference is checked, passed to the hit handler, and reset
 	elif cumulative_velocity_difference.length() > Constants.sfx.COLISION_VELOCITY_THRESHOLD:
-		
 		if collision:
 			pass
 			character.velocity = character.bounce_calculator(character.velocity, cumulative_velocity_difference, collision.get_normal(), Constants.movement.WALL_BOUNCE_ELASTICITY)
@@ -56,11 +66,10 @@ func physics(delta):
 
 func body_entered(body):
 	match body.local_type:
-		Constants.CollisionTypes.Reset:
-			Transition.emit(self, Constants.StateIdentifiers.Reset)
 		Constants.CollisionTypes.Water:
 			on_child_transition(current_state, Constants.StateIdentifiers.Water)
 	current_state.body_entered(body)
+
 
 
 func area_entered(area):
@@ -70,7 +79,8 @@ func area_entered(area):
 			var angle = (2 * area.rotation) - character.velocity.angle()
 			character.velocity = Vector2.from_angle(angle) * character.velocity.length()
 			
-			character.boing_handler(character.velocity, character.position, current_state)
+			character.boing_handler(character.velocity, character.position, current_state.identifier)
+
 
 
 func body_exited(body):
@@ -78,7 +88,10 @@ func body_exited(body):
 		on_child_transition(current_state, Constants.StateIdentifiers.Air)
 
 
+
 func input(event):
 	# reuse in death code
 	if event.is_action_pressed("reset_player"):
 		Transition.emit(self, Constants.StateIdentifiers.Reset)
+	if event.is_action_pressed("camera_swap"):
+		Transition.emit(self, Constants.StateIdentifiers.Camera)

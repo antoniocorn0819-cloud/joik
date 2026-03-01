@@ -1,7 +1,7 @@
 extends Node
 
 enum StateIdentifiers {
-	Player, Moving, Water, Air, Death, Reset
+	Player, Moving, Water, Air, Death, Reset, Camera
 }
 
 ## states for fish movement code
@@ -22,7 +22,13 @@ const movement: Dictionary[String, Variant] = {
 	# acceleration in pixels per second squared
 	"ACCELERATION": 1200.0,
 	"GRAVITY": 1200.0,
+	
+	# elasticity from 0 to 1
 	"WALL_BOUNCE_ELASTICITY": 0.1,
+	
+	# for camera state
+	"CAMERA_SPEED_SLOW": 2000.0,
+	"CAMERA_SPEED_FAST": 5000.0,
 }
 
 ## constants used for input and control

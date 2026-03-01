@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://byuvmuu6nq8qx" path="res://Scripts/States/water.gd" id="3_qo28u"]
 [ext_resource type="Script" uid="uid://cg3lxddkwn3m8" path="res://Scripts/States/air.gd" id="4_kvhr5"]
 [ext_resource type="Script" uid="uid://b8mnpxk3x3h2q" path="res://Scripts/States/reset.gd" id="5_lg452"]
+[ext_resource type="Script" uid="uid://b0vkt1xye6uxg" path="res://Scripts/States/camera_mode.gd" id="7_m0v5q"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_61xym"]
 lifetime_randomness = 0.51
@@ -260,7 +261,7 @@ script = ExtResource("3_qo28u")
 character = NodePath("../../..")
 identifier = 2
 
-[node name="Node" type="Node" parent="CharacterController/Moving" unique_id=894342444 node_paths=PackedStringArray("character")]
+[node name="Air" type="Node" parent="CharacterController/Moving" unique_id=894342444 node_paths=PackedStringArray("character")]
 script = ExtResource("4_kvhr5")
 character = NodePath("../../..")
 identifier = 3
@@ -269,6 +270,11 @@ identifier = 3
 script = ExtResource("5_lg452")
 character = NodePath("../..")
 identifier = 5
+
+[node name="Camera_Mode" type="Node" parent="CharacterController" unique_id=1127462237 node_paths=PackedStringArray("character")]
+script = ExtResource("7_m0v5q")
+character = NodePath("../..")
+identifier = 6
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1622091940]
 visible = false
