@@ -33,5 +33,4 @@ func input(event):
 				character.camera.zoom -= Constants.control.ZOOM_INCREMENT
 			else:
 				character.camera.zoom = Vector2(Constants.control.ZOOM_MIN,Constants.control.ZOOM_MIN)
-	print(current_state.identifier)
 	current_state.input(event)

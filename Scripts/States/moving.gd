@@ -21,6 +21,7 @@ var collision: KinematicCollision2D
 
 func physics(delta):
 	current_state.physics(delta)
+	
 	character.look_at(character.get_global_mouse_position())
 	
 	
@@ -42,7 +43,7 @@ func physics(delta):
 					Constants.CollisionTypes.Reset:
 						Transition.emit(self, Constants.StateIdentifiers.Reset)
 						# disables sound
-						# return
+						return
 	
 	
 	# collision magnitude detection code only needed for vfx, sfx, and now wall bouncing

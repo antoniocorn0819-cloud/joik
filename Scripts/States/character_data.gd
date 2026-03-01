@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@export var current_checkpoint_id: int = 1
+@export var current_checkpoint_id: int
 @export var checkpoint_manager: Node
 @export var camera: Camera2D
 @export var animator: AnimationPlayer
