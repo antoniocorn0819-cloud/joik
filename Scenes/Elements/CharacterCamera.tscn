@@ -239,7 +239,7 @@ _data = {
 [node name="CharacterCamera" type="CharacterBody2D" unique_id=1842549794 node_paths=PackedStringArray("camera", "animator", "bubble_emitter", "moving_machine")]
 collision_mask = 2
 script = ExtResource("1_nd5vq")
-current_checkpoint_id = 3
+current_checkpoint_id = 1
 camera = NodePath("Camera2D")
 animator = NodePath("AnimationPlayer")
 bubble_emitter = NodePath("GPUParticles2D")

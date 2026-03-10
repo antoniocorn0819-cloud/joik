@@ -15,7 +15,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="joik"
-run/main_scene="uid://ch6d2ggk46xkm"
+run/main_scene="uid://bvqpbwe832nig"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -59,4 +59,4 @@ camera_swap={
 textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
-environment/defaults/default_clear_color=Color(0.49940014, 0.7506479, 0.9783601, 1)
+environment/defaults/default_clear_color=Color(0.5686275, 0.8901961, 0.92156863, 1)
