@@ -11,7 +11,7 @@
 
 [node name="CharacterCamera" parent="." unique_id=1842549794 node_paths=PackedStringArray("checkpoint_manager") instance=ExtResource("1_jxaeh")]
 position = Vector2(0, 323.65)
-current_checkpoint_id = 10
+current_checkpoint_id = 4
 checkpoint_manager = NodePath("../Node")
 
 [node name="Tile Container" type="Node2D" parent="." unique_id=501625744]
