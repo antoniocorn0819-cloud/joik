@@ -14,6 +14,7 @@ enum Sound_Type {
 	Swim,
 	Checkpoint,
 	Plop,
+	Death
 }
 
 ## dictionary that stores arrays of sounds with keys of sound types
@@ -79,6 +80,13 @@ const sound_library: Dictionary[Sound_Type, Variant] = {
 		preload("res://Assets/Sounds/Boing/Boing_Loud-2.wav"),
 		preload("res://Assets/Sounds/Boing/Boing_Loud-3.wav")
 	],
+	
+	Sound_Type.Death: [
+		preload("res://Assets/Sounds/Death/Death-1.wav"),
+		preload("res://Assets/Sounds/Death/Death-2.wav"),
+		preload("res://Assets/Sounds/Death/Death-3.wav"),
+		preload("res://Assets/Sounds/Death/Death-4.wav"),
+	]
 }
 
 
